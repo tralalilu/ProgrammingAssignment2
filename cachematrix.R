@@ -16,7 +16,7 @@
 ## the matrix. The third one, named setinv, assigns (sets) the value of the 
 ## inverse matrix. Finally, the last function, getinv, gets the value of this 
 ## inverse. All these functions, except the set function, will be later used in 
-##the definition of the second function, cacheSolve.
+## the definition of the second function, cacheSolve.
 
 makeCacheMatrix <- function(x = matrix()) {
         inv <- NULL
@@ -52,7 +52,8 @@ makeCacheMatrix <- function(x = matrix()) {
 ## before, so cacheSolve has to compute it. It first gets the value of the matrix
 ## from the list and it stores it in a variable named data. Then it computes 
 ## the inverse of data using the function solve() and it assigns this value to
-## the variable inv, which is returned.
+## the variable inv. This value is set in the cache using the setinv function, 
+## and then it is returned.
 
 cacheSolve <- function(x, ...) {
         inv <- x$getinv()
