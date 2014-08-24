@@ -12,25 +12,26 @@
 ## anything about the cases when the matrix is not invertible), and returns
 ## a list containing four functions. The first function in this list, denoted
 ## by set, sets the value of the matrix and initializes its inverse (that we 
-## want to compute) with NULL.The second function, get, gets the value of 
-## the matrix. The third one, named setinv, assigns (sets) the value of the 
+## want to compute) with NULL (the set function is used if we want to change the 
+## matrix without creating a new object, so without calling the makeCacheMatrix 
+## function again). The second function, get, gets the value of the
+## matrix. The third one, named setinv, assigns (sets) the value of the 
 ## inverse matrix. Finally, the last function, getinv, gets the value of this 
 ## inverse. All these functions, except the set function, will be later used in 
 ## the definition of the second function, cacheSolve.
 
 makeCacheMatrix <- function(x = matrix()) {
-        inv <- NULL
-        set <- function(y) {
-                x <<- y
-                inv <<- NULL
+        inv <- NULL         
+        
+        set <- function(y) {     
+                x <<- y        
+                inv <<- NULL    
         }
-        get <- function() x
-        setinv <- function(inverse) inv <<- inverse
-        getinv <- function() inv
-        list(set = set, get = get,
-             setinv = setinv,
-             getinv = getinv)
-
+        get <- function() x    
+        setinv <- function(inverse) inv <<- inverse    
+        getinv <- function() inv       
+        
+        list(set = set, get = get, setinv = setinv, getinv = getinv)
 }
 
 
@@ -56,15 +57,15 @@ makeCacheMatrix <- function(x = matrix()) {
 ## and then it is returned.
 
 cacheSolve <- function(x, ...) {
-        inv <- x$getinv()
+        inv <- x$getinv()      
         
-        if(!is.null(inv)) {
-                message("getting cached data")
-                return(inv)
+        if(!is.null(inv)) {    
+                message("getting cached data")   
+                return(inv)                      
         }
         
-        data <- x$get()
-        inv <- solve(data, ...)
-        x$setinv(inv)
-        inv
+        data <- x$get()           
+        inv <- solve(data, ...)   
+        x$setinv(inv)             
+        inv                      
 }
